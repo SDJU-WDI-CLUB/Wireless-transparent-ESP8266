@@ -2,28 +2,24 @@
 
 LVGL Screen(128, 32);
 
-LVGL::LVGL(int w, int h): Adafruit_SSD1306(w, h, &Wire, -1) {
-}
+LVGL::LVGL(int w, int h) : Adafruit_SSD1306(w, h, &Wire, -1) {}
 
-LVGL::~LVGL() {};
+LVGL::~ LVGL() = default;
 
 void LVGL::init() {
     Wire.begin(D1, D2);
-    if (!this->begin(SSD1306_SWITCHCAPVCC, 0x3C))
-    {
-        for (;;)
-            ;
+    if (!this->begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+        while (true);
     }
-
     this->Clear();
 }
 
-void  LVGL::Clear() {
+void LVGL::Clear() {
     this->clearDisplay();
     this->display();
 }
 
-void LVGL::ShowStr(String str) {
+void LVGL::ShowStr(const String &str) {
     this->clearDisplay();
     this->setTextSize(Charsize);
     this->setTextColor(WHITE);
@@ -32,7 +28,7 @@ void LVGL::ShowStr(String str) {
     this->display();
 }
 
-void LVGL::ShowStr(const char* str) {
+void LVGL::ShowStr(const char *str) {
     this->clearDisplay();
     this->setTextSize(Charsize);
     this->setTextColor(WHITE);
@@ -42,7 +38,7 @@ void LVGL::ShowStr(const char* str) {
 }
 
 // 6x8
-bool LVGL::ShowStr(int line, String str) {
+bool LVGL::ShowStr(int line, const String &str) {
     if (line >= MaxLine)
         return false;
     this->setTextSize(Charsize);
@@ -53,7 +49,7 @@ bool LVGL::ShowStr(int line, String str) {
     return true;
 }
 
-bool LVGL::ShowStr(int line, int x, String str) {
+bool LVGL::ShowStr(int line, int x, const String &str) {
     if (line >= MaxLine || x >= MaxCharSzie)
         return false;
 
