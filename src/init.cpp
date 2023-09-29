@@ -3,9 +3,9 @@
 bool
 baseInit(const String &SSID, const String &password, const WiFiMode &mode) {
     //串口初始化
-    Serial.begin(2000000);
-    Serial.setTimeout(10);
-    Screen.init();
+//    Serial.begin(2000000);
+//    Serial.setTimeout(10);
+//    Screen.init();
     return connectWifi(SSID, password, mode);
 }
 
@@ -48,6 +48,7 @@ bool
 connectWifi(const String &SSID, const String &password, const WiFiMode &mode, bool ignored) {
     // wifi连接
     WiFi.disconnect();
+    Screen.clearDisplay();
     return connectWifi(SSID, password, mode);
 }
 
@@ -55,5 +56,6 @@ bool
 connectWifi(const String &SSID, const String &password, bool ignored) {
     // wifi连接
     WiFi.disconnect();
+    Screen.clearDisplay();
     return connectWifi(SSID, password);
 }
